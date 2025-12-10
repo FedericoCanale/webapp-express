@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const db = require('./database/db');
 app.use(express.static("public"));
 app.use(express.json());
 

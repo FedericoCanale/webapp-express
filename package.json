@@ -8,6 +8,12 @@
     "start": "node app.js",
     "dev": "node --watch app.js"
   },
+  "env": {
+    "DB_HOST": "localhost",
+    "DB_USER": "root",
+    "DB_PASSWORD": "LaTuaPassword",
+    "DB_NAME": "nome_database"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

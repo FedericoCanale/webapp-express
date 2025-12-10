@@ -5,14 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "node --watch app.js"
-  },
-  "env": {
-    "DB_HOST": "localhost",
-    "DB_USER": "root",
-    "DB_PASSWORD": "LaTuaPassword",
-    "DB_NAME": "nome_database"
+    "start": "node --env-file=.env app.js",
+    "dev": "node --env-file=.env --watch app.js"
   },
   "keywords": [],
   "author": "",

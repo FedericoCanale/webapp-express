@@ -21,9 +21,45 @@ const index = (req, res) => {
 const show = (req, res) => {
     const { id } = req.params;
 
+    const sqlMovie = 'SELECT * FROM movies WHERE id = ?';
+    const sqlReviews = 'SELECT * FROM reviews WHERE movie_id = ?';
 
-    res.json({
-        message: `Qui ci saranno i dettagli del film con id ${id}`
+    // 1) Recupero il film
+    db.query(sqlMovie, [id], (err, movieResults) => {
+        if (err) {
+            console.error('Errore nella query del film:', err);
+            return res.status(500).json({
+                error: true,
+                message: 'Errore interno del server'
+            });
+        }
+
+        // Nessun film trovato = 404
+        if (movieResults.length === 0) {
+            return res.status(404).json({
+                error: true,
+                message: 'Film non trovato'
+            });
+        }
+
+        const movie = movieResults[0];
+
+        // 2) Recupero le recensioni del film
+        db.query(sqlReviews, [id], (err, reviewsResults) => {
+            if (err) {
+                console.error('Errore nella query delle recensioni:', err);
+                return res.status(500).json({
+                    error: true,
+                    message: 'Errore interno del server'
+                });
+            }
+
+            // Risposta finale: film + reviews
+            res.json({
+                ...movie,
+                reviews: reviewsResults
+            });
+        });
     });
 };
 

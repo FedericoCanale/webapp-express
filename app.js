@@ -1,6 +1,6 @@
 const express = require('express');
-const app = express();
 const cors = require("cors");
+const app = express();
 const port = 3000;
 const db = require('./database/db');
 app.use(express.static("public"));
@@ -23,9 +23,11 @@ app.use(notFound);
 const errorHandler = require('./middlewares/errorHandler');
 app.use(errorHandler);
 //Middleware cors
-app.use(cors({
-    origin: `http://localhost:5173`
-}));
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+    })
+);
 // Avvio del server
 app.listen(port, () => {
     console.log(`Server in ascolto su http://localhost:${port}`);

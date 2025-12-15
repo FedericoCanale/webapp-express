@@ -63,7 +63,19 @@ const show = (req, res) => {
     });
 };
 
+const storeReview = (req, res) => {
+    console.log(req.body)
+
+    const movieId = Number(req.params.id)
+    const { name, vote, text } = req.body
+
+    console.log(movieId, name, vote, text)
+
+    return res.send('Review stored')
+}
+
 module.exports = {
     index,
-    show
+    show,
+    storeReview
 };

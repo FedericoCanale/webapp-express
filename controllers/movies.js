@@ -69,6 +69,14 @@ const storeReview = (req, res) => {
     const movieId = Number(req.params.id)
     const { name, vote, text } = req.body
 
+    // Validation per backend
+    if (!name || !vote || !text) {
+        return res.status(400).json({
+            error: true,
+            message: "Tutti i campi sono obbligatori"
+        });
+    }
+
     console.log(movieId, name, vote, text)
 
     const sql = 'INSERT INTO reviews (movie_id, name, vote, text) VALUES (?, ?, ?, ?)'
